@@ -31,11 +31,6 @@
 ### 요약
 
 BIOS는 컴퓨터의 부팅을 담당하고, 하드웨어 초기화 및 기본적인 시스템 설정을 처리하는 중요한 역할을 하는 펌웨어입니다. UEFI는 BIOS의 발전된 형태로, 더 많은 기능과 효율성을 제공합니다. BIOS와 UEFI 모두 컴퓨터의 성능을 최적화하고, 시스템 보안을 관리하는 데 중요한 역할을 합니다.
-"""
 
-# Write the content to a .md file
-file_path = '/mnt/data/bios_explanation.md'
-with open(file_path, 'w') as file:
-    file.write(conversation)
 
-file_path
+
