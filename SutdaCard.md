@@ -1,8 +1,9 @@
 # SutdaCard equals 메서드 관련 질문과 답변
 
-## 질문![KakaoTalk_20250122_152249886](https://github.com/user-attachments/assets/e373c651-c758-486b-9f8c-f7b1172fe0ed)
+## 질문
+![KakaoTalk_20250122_152249886](https://github.com/user-attachments/assets/d3ea813c-c290-4406-8896-83be3fac6611)
 
-왜 이렇게 해야하나요?
+왜 빨간색 글씨처럼 해야 하는지 모르겠습니다.
 
 ## 답변
 빨간색으로 표시된 부분(코드)은 `equals` 메서드의 구현에 중요한 조건들을 충족하기 위해 작성되었습니다. 하나씩 이유를 설명해 드릴게요:
@@ -85,3 +86,100 @@ public boolean equals(SutdaCard obj) {
 - `캐스팅`은 해당 타입의 속성과 메서드에 접근할 수 있도록 합니다.
 
 이 두 가지는 서로 다른 역할을 수행하며, 자바에서 타입 안정성과 코드 명확성을 보장하기 위해 모두 필요합니다.
+
+---
+
+## 질문
+`.equals` 하면 안 되나요? `==` 이렇게 해야 하는 이유를 모르겠습니다.
+
+## 답변
+`==`와 `.equals`는 자바에서 서로 다른 목적을 가진 연산자와 메서드입니다. 각각의 차이점과 사용 이유를 설명드릴게요.
+
+---
+
+### 1. **`==` 연산자**
+- `==`는 **두 참조 변수(Reference Variable)가 같은 객체를 참조하는지** 확인합니다.
+- 즉, 두 변수가 메모리 주소(참조)를 비교합니다.
+- 예를 들어:
+
+```java
+SutdaCard c1 = new SutdaCard(3, true);
+SutdaCard c2 = new SutdaCard(3, true);
+System.out.println(c1 == c2); // false (두 객체는 서로 다른 메모리 위치)
+```
+
+위 예에서 `c1`과 `c2`는 같은 값을 가지고 있지만, 서로 다른 객체이므로 `==`로 비교하면 `false`가 반환됩니다.
+
+---
+
+### 2. **`.equals` 메서드**
+- `.equals`는 **객체의 내용(값)을 비교**하도록 설계되었습니다.
+- 기본적으로 `Object` 클래스에서 상속된 `equals` 메서드는 `==`와 동일하게 참조를 비교합니다. 하지만 이를 재정의하면 객체의 내용 비교가 가능합니다.
+
+예를 들어, `SutdaCard` 클래스에서 `equals`를 재정의하면 다음과 같이 동작합니다:
+
+```java
+SutdaCard c1 = new SutdaCard(3, true);
+SutdaCard c2 = new SutdaCard(3, true);
+System.out.println(c1.equals(c2)); // true (내용이 같으므로 동일로 간주)
+```
+
+---
+
+### 3. **`==`와 `.equals`의 선택**
+- **객체 참조를 비교해야 한다면 `==`를 사용**합니다.
+  - 예: 객체가 동일한지 확인하는 경우.
+- **객체의 내용을 비교해야 한다면 `.equals`를 사용**합니다.
+  - 예: 두 `SutdaCard`가 같은 값을 가지는지 확인하는 경우.
+
+---
+
+### 결론
+- `SutdaCard` 클래스에서 객체의 값을 비교하려면 `.equals`를 올바르게 재정의하고 이를 사용해야 합니다.
+- `==`는 객체 참조를 비교하는 데만 적합하며, 두 객체의 내용이 같더라도 다른 객체라면 `false`를 반환합니다.
+
+---
+
+## 질문
+`num == c.num` 대신 `num.equals(c.num)` 하면 안 되는 이유는 무엇인가요?
+
+## 답변
+`num.equals(c.num)`를 사용할 수 있는 경우는 `num`이 **참조 타입(Reference Type)**일 때만 가능합니다. 그러나 `num`이 기본 타입인 `int`라면 `equals` 메서드를 호출할 수 없습니다. 이 차이를 설명드릴게요:
+
+---
+
+### 1. **기본 타입 vs 참조 타입**
+- `int`는 기본 타입(Primitive Type)입니다. 기본 타입은 값 자체를 저장하며, 메서드를 가질 수 없습니다.
+- `Integer`는 참조 타입(Reference Type)입니다. 기본 타입인 `int`를 감싸는 객체로, 메서드를 가질 수 있습니다.
+
+예를 들어:
+
+```java
+int a = 3;
+Integer b = 3;
+System.out.println(a.equals(b)); // 컴파일 에러 (a는 기본 타입)
+System.out.println(b.equals(a)); // true (b는 참조 타입)
+```
+
+`num`이 `int` 타입이라면 `equals` 메서드를 사용할 수 없으므로 `==`를 사용해야 합니다.
+
+---
+
+### 2. **언박싱(Unboxing)과 오토박싱(Auto-boxing)**
+자바는 `Integer`와 같은 참조 타입과 `int` 같은 기본 타입 간의 변환을 자동으로 처리하는 오토박싱(Auto-boxing)을 지원합니다. 따라서 다음과 같은 코드는 동작합니다:
+
+```java
+Integer num1 = 3;
+Integer num2 = 3;
+System.out.println(num1.equals(num2)); // true
+```
+
+하지만 오토박싱을 이용한다고 해도 `num`이 `int`라면 `equals`를 직접 호출할 수 없습니다. 대신 `==`를 사용해야 합니다.
+
+---
+
+### 결론
+- `num == c.num`은 `num`과 `c.num`이 기본 타입 `int`일 때 적합합니다.
+- `num.equals(c.num)`를 사용하려면 `num`과 `c.num`이 참조 타입(`Integer`)이어야 합니다.
+
+따라서 `SutdaCard`의 `num`이 `int` 타입으로 정의되어 있다면 `==`를 사용해야 합니다. 😊
