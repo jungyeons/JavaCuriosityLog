@@ -1,7 +1,9 @@
 
 # Q&A: equals vs == in Java
 
-## Q: 	class Student implements Comparable<Student> {
+## Q:
+```
+public class Student implements Comparable<Student> {
 
 	 
 
@@ -53,8 +55,11 @@
 
 		}
 
-	}에서 == 대신 equals를 써도되나? 또 헷갈림 ㅠㅠ
-A: 좋은 질문입니다! `compareTo()` 메서드 내에서 `==` 대신 `equals()`를 사용할 수 있는지에 대해 헷갈릴 수 있습니다. 그러나 **`compareTo()` 메서드 내에서는 `==`와 `equals()`를 다르게 사용해야 합니다.**
+	}
+```
+에서 == 대신 equals를 써도되나? 또 헷갈림 ㅠㅠ         
+## A
+좋은 질문입니다! `compareTo()` 메서드 내에서 `==` 대신 `equals()`를 사용할 수 있는지에 대해 헷갈릴 수 있습니다. 그러나 `compareTo()` 메서드 내에서는 `==`와 `equals()`를 다르게 사용해야 합니다.**
 
 ### `==` vs `equals()`
 
