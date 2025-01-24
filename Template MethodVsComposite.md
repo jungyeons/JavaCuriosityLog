@@ -1,6 +1,6 @@
 # Q&A: Template Method 패턴과 Composite 패턴의 차이
 
-## Q: Template Method 패턴과 Composite 패턴의 차이애 대해서 설명해주세요
+## Q: Template Method 패턴과 Composite 패턴의 차이에 대해서 설명해주세요
 ### A:
 Template Method 패턴은 **상위 클래스에서 알고리즘의 기본 뼈대를 정의**하고, **구체적인 구현은 하위 클래스에서 처리하도록** 설계된 패턴입니다. 알고리즘의 "일부 단계"만 서브클래스에서 오버라이드하도록 허용하며, 공통적인 알고리즘 흐름은 상위 클래스에 고정됩니다.
 
